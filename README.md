@@ -1,4 +1,4 @@
-# TestDino MCP Server for Cursor
+# TestDino Plugin for Cursor
 
 This repository contains the configuration needed to integrate the TestDino Model Context Protocol (MCP) server with Cursor IDE. The MCP enables your agents to interact directly with TestDino projects, allowing you to inspect test runs, debug failing or flaky test cases, manage manual test cases and suites, and run TestDino audits through natural language.
 
