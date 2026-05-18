@@ -1,73 +1,104 @@
-# TestDino Cursor Plugin
+# TestDino MCP Server for Cursor
 
-Cursor plugin for TestDino using the documented local MCP flow for Cursor.
+This repository contains the configuration needed to integrate the TestDino Model Context Protocol (MCP) server with Cursor IDE. The MCP enables your agents to interact directly with TestDino projects, allowing you to inspect test runs, debug failing or flaky test cases, manage manual test cases and suites, and run TestDino audits through natural language.
 
-The MCP server source lives in the `testdino-hq/testdino-mcp` repository, and this plugin is based on the TestDino MCP local setup and tools reference docs.
+## Features
 
-TestDino: `https://app.testdino.com`
+The TestDino MCP server provides the following capabilities:
 
-## What This Plugin Includes
+- Connection and access checks: Validate your PAT, list organizations, and discover available projects
+- Test run analysis: List test runs, inspect run details, and review failures across branches, commits, authors, environments, and time ranges
+- Test case debugging: Inspect test case details, historical failures, retries, artifacts, and debugging context
+- Manual test management: List, create, and update manual test cases and suites
+- Audit workflows: Run the TestDino audit flow for Playwright test code
 
-- `.cursor-plugin/plugin.json` for Cursor plugin metadata
-- `mcp.json` to start `testdino-mcp` through `npx`
-- skills for connection checks, run analysis, manual test management, and TestDino audits
+## MCP Server
 
-## Connection Model
+The plugin includes the [Testdino MCP server](https://github.com/testdino-hq/testdino-mcp), giving agents tool access to the full Testdino API.
 
-This plugin follows TestDino's local MCP path for Cursor:
+## Prerequisites
 
-- Cursor uses the local MCP server path for TestDino
-- the server runs through `npx -y testdino-mcp`
-- authentication uses `TESTDINO_PAT` in client configuration
+Before setting up the TestDino MCP server, ensure you have:
 
-This matches TestDino's documented guidance for Cursor and other local MCP clients.
-
-## Requirements
-
+- Cursor IDE installed
 - Node.js installed
-- a valid TestDino Personal Access Token
-- `TESTDINO_PAT` available in the environment Cursor inherits
+- Access to a TestDino workspace
+- A valid TestDino Personal Access Token
 
-## Generate A TestDino PAT
+## Installation Instructions for Cursor
+
+Follow these steps to configure the TestDino MCP server in Cursor.
+
+### Step 1: Generate a TestDino PAT
 
 To generate a Personal Access Token in TestDino:
 
-1. Sign in to TestDino
+1. Sign in to [TestDino](https://app.testdino.com)
 2. Open `Profile`
 3. Go to `My Account`
 4. Open `Personal Access Tokens`
 5. Generate a new token
 
-Use that token as your `TESTDINO_PAT` value for local plugin testing.
+Use that token as your `TESTDINO_PAT` value.
 
-Example PowerShell session:
+### Step 2: Add the token to the plugin MCP config
 
-```powershell
-$env:TESTDINO_PAT="your-token-here"
-cursor .
+Open [mcp.json](./mcp.json) and paste the generated PAT token into the `TESTDINO_PAT` field.
+
+Example configuration:
+
+```json
+{
+  "mcpServers": {
+    "testdino": {
+      "command": "npx",
+      "args": ["-y", "testdino-mcp"],
+      "env": {
+        "TESTDINO_PAT": "paste-your-generated-pat-here"
+      }
+    }
+  }
+}
 ```
 
-## Documented Workflows
+### Step 3: Reload Cursor
 
-The plugin is organized around the documented TestDino MCP tool groups:
+After updating `mcp.json`, reload Cursor so the TestDino plugin picks up the new configuration.
 
-- `health` for connection validation and project discovery
-- test run analysis with `list_testruns`, `get_run_details`, `list_testcase`, `get_testcase_details`, and `debug_testcase`
-- manual test management with `list_manual_test_cases`, `get_manual_test_case`, `create_manual_test_case`, `update_manual_test_case`, `list_manual_test_suites`, and `create_manual_test_suite`
+### Step 4: Start using TestDino in chat
 
-## Example Prompts
+Once Cursor reloads, you can start using the TestDino plugin in chat.
 
-- Check if my TestDino connection is working
-- Show test runs within the last hour in project xyz
-- Show me all failed tests from the last run
-- Debug the test case "visual.spec.js" on development
-- List all critical priority test cases in the checkout suite
-- Create a new test case for password reset in Authentication
+## Usage Examples
 
-These prompts are adapted from the TestDino MCP overview and tools reference guidance.
+Once configured, you can interact with TestDino through Cursor using natural language:
 
-## Support
+- Connection check: `Check if my TestDino connection is working`
+- Project discovery: `Show my TestDino projects`
+- Test run analysis: `Show test runs from the last hour`
+- Failure analysis: `List failed test cases from the latest run`
+- Flaky test debugging: `Find flaky tests in TestDino from the last 3 days`
+- Test case debugging: `Debug the failing test case "visual.spec.js" in TestDino`
+- Manual test management: `Create a manual test case in TestDino for checkout`
+- Audit workflow: `Run a TestDino audit on this Playwright spec`
+
+## Documentation & Resources
+
+- TestDino: `https://app.testdino.com`
+- MCP Documentation: `https://docs.testdino.com/mcp/local`
+- TestDino Documentation: `https://docs.testdino.com`
+- MCP Server Repository: `https://github.com/testdino-hq/testdino-mcp`
+
+## Notes & Limitations
+
+- Local MCP flow: This plugin is currently configured for TestDino's local MCP pattern in Cursor
+- PAT required: The MCP server requires `TESTDINO_PAT`
+- Audit scope: The TestDino audit flow is intended for Playwright automated test code
+- Publish safety: Do not publish the plugin with a hardcoded PAT in `mcp.json`
+
+## Questions or Issues?
+
+For questions about the TestDino MCP server or setup issues, please use the resources below:
 
 - TestDino Support: `support@testdino.com`
 - TestDino Documentation: `https://docs.testdino.com`
-- MCP Documentation: `https://docs.testdino.com/mcp/local`
