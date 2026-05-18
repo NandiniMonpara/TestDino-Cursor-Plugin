@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "testdino": {
+      "command": "npx",
+      "args": ["-y", "testdino-mcp"],
+      "env": {
+        "TESTDINO_PAT": "${env:TESTDINO_PAT}"
+      }
+    }
+  }
+}

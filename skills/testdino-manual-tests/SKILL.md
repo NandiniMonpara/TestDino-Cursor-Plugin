@@ -1,0 +1,37 @@
+# TestDino Manual Tests
+
+Use TestDino manual-test tools when the user wants to create, update, or browse manual QA assets.
+
+Preferred flow:
+
+1. Call `health` if `projectId` is not known.
+2. Use `list_manual_test_suites` to find the destination suite when needed.
+3. Use `list_manual_test_cases` or `get_manual_test_case` to inspect existing cases.
+4. Use `create_manual_test_case`, `update_manual_test_case`, or `create_manual_test_suite` for edits.
+
+Good requests for this skill:
+
+- create a manual test case
+- update preconditions or steps
+- list manual cases in a suite
+- create a new manual test suite
+
+Common filters from the docs:
+
+- search
+- suite
+- status
+- priority
+- severity
+- type
+- layer
+- behavior
+- automation status
+- tags
+- flaky flag
+
+When creating a case:
+
+- confirm or resolve the target suite first
+- include steps, preconditions, and postconditions when the user provides them
+- preserve existing fields on updates by sending only the fields that should change
