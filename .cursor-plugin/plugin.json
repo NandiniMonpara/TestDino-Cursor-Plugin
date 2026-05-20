@@ -1,7 +1,7 @@
 {
   "name": "testdino",
-  "version": "1.0.0",
-  "description": "Use TestDino inside Cursor to inspect test runs, debug failing test cases, manage manual tests, and run TestDino audits.",
+  "version": "1.1.0",
+  "description": "Use TestDino inside Cursor through the hosted remote MCP server to inspect test runs, debug failing test cases, manage manual tests, and run TestDino audits.",
   "author": {
     "name": "TestDino",
     "email": "support@testdino.com"
