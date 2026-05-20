@@ -10,6 +10,9 @@ The TestDino MCP server provides the following capabilities:
 - Test run analysis: List test runs, inspect run details, and review failures across branches, commits, authors, environments, and time ranges
 - Test case debugging: Inspect test case details, historical failures, retries, artifacts, and debugging context
 - Manual test management: List, create, and update manual test cases and suites
+- Releases: List, inspect, create, and update releases or milestones
+- Manual runs: List, inspect, create, and update manual runs, plus inspect and update per-case run results
+- Exploratory sessions: List, inspect, create, and update exploratory testing sessions
 - Audit workflows: Run the TestDino audit flow for Playwright test code
 
 ## MCP Server
@@ -80,6 +83,14 @@ Once configured, you can interact with TestDino through Cursor using natural lan
 - Flaky test debugging: `Find flaky tests in TestDino from the last 3 days`
 - Test case debugging: `Debug the failing test case "visual.spec.js" in TestDino`
 - Manual test management: `Create a manual test case in TestDino for checkout`
+- Releases: `List releases in TestDino for project xyz`
+- Release details: `Show me release MS-12 in TestDino`
+- Manual runs: `List manual runs for release MS-12 in TestDino`
+- Run test cases: `Show all test cases in run RUN-12`
+- Run case update: `Mark TC-156 as passed in RUN-12`
+- Run assignment: `Assign TC-156 in RUN-12 to alice@example.com`
+- Sessions: `Create an exploratory session for auth regression in TestDino`
+- Session update: `Update session SES-12 to under review`
 - Audit workflow: `Run a TestDino audit on this Playwright spec`
 
 ## Documentation & Resources
@@ -93,6 +104,7 @@ Once configured, you can interact with TestDino through Cursor using natural lan
 
 - Local MCP flow: This plugin is currently configured for TestDino's local MCP pattern in Cursor
 - PAT required: The MCP server requires `TESTDINO_PAT`
+- Current MCP surface: TestDino MCP now includes automated test analytics, manual test cases, releases, manual runs, exploratory sessions, and audit workflows
 - Audit scope: The TestDino audit flow is intended for Playwright automated test code
 - Publish safety: Do not publish the plugin with a hardcoded PAT in `mcp.json`
 

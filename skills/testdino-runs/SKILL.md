@@ -31,3 +31,4 @@ Common filters from the docs:
 
 Use `list_testruns` first when the user does not already know the exact run ID or counter.
 Use `debug_testcase` when the user wants root-cause analysis and recommendations across historical runs, not just a single-run snapshot.
+Use `health` at the start of a session when the project is still ambiguous.
